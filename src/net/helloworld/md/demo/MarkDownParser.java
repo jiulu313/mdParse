@@ -27,7 +27,6 @@ public class MarkDownParser {
             BufferedReader mdFile = new BufferedReader(dis);
             this.fileName = fileName.substring(fileName.lastIndexOf('/') + 1, fileName.lastIndexOf('.'));
 
-            // ��ȡ makedown �ļ�
             String mdLine;
             mdList.add(" ");
             while ((mdLine = mdFile.readLine()) != null) {
