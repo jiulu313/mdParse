@@ -1,6 +1,9 @@
 package net.helloworld.md.parser.impl;
 
 import net.helloworld.md.constant.magic.CHAR_SYMBOL;
+import net.helloworld.md.mark.MARK;
+import net.helloworld.md.mark.MarkContext;
+import net.helloworld.md.mark.MarkEntity;
 import net.helloworld.md.parser.MarkParser;
 
 /**
@@ -16,24 +19,25 @@ public class MarkdownParserComposite implements MarkParser {
         return instance;
     }
 
-    @Override public boolean detectStartMark(net.helloworld.md.mark.MarkContext markContext) {
+    @Override
+    public boolean detectStartMark(MarkContext markContext) {
         return false;
     }
 
     @Override
-    public net.helloworld.md.mark.MarkEntity validate(net.helloworld.md.mark.MarkContext mark) {
+    public MarkEntity validate(MarkContext mark) {
         return null;
     }
 
     @Override
-    public void parse(net.helloworld.md.mark.MarkContext markContext) {
+    public void parse(MarkContext markContext) {
         //if first char is not \n then fill
-        if (markContext.getParentMark() == null&&markContext.getContent().charAt(0)!= CHAR_SYMBOL.ENTER) {
+        if (markContext.getParentMark() == null && markContext.getContent().charAt(0) != CHAR_SYMBOL.ENTER) {
             markContext.setContent(CHAR_SYMBOL.ENTER + markContext.getContent());
         }
         do {
             //detect start mark
-            if (markContext.getCurrentMark()!=null&&markContext.getCurrentMark().getNextEntity()!= null) {
+            if (markContext.getCurrentMark() != null && markContext.getCurrentMark().getNextEntity() != null) {
                 markContext.setCurrentMark(markContext.getCurrentMark().getNextEntity());
             } else {
                 markContext.setCurrentMark(null);
@@ -44,8 +48,8 @@ public class MarkdownParserComposite implements MarkParser {
                 continue;
             }
 
-            MarkParser literaryParse = net.helloworld.md.mark.MarkContext.MARK_PARSER_MAP.get(net.helloworld.md.mark.MARK.LITERARY);
-            net.helloworld.md.mark.MarkEntity markEntity = literaryParse.validate(markContext);
+            MarkParser literaryParse = MarkContext.MARK_PARSER_MAP.get(MARK.LITERARY);
+            MarkEntity markEntity = literaryParse.validate(markContext);
             if (markEntity != null) {
                 markContext.setCurrentMark(markEntity);
                 //按文本处理
@@ -56,7 +60,7 @@ public class MarkdownParserComposite implements MarkParser {
     }
 
     @Override
-    public net.helloworld.md.mark.MARK mark() {
+    public MARK mark() {
         return null;
     }
 }
