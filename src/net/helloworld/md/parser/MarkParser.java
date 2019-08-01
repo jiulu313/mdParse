@@ -1,8 +1,8 @@
-package com.sparrow.markdown.parser;
+package net.helloworld.md.parser;
 
-import com.sparrow.markdown.mark.MARK;
-import com.sparrow.markdown.mark.MarkContext;
-import com.sparrow.markdown.mark.MarkEntity;
+import net.helloworld.md.mark.MARK;
+import net.helloworld.md.mark.MarkContext;
+import net.helloworld.md.mark.MarkEntity;
 
 /**
  * @author harry

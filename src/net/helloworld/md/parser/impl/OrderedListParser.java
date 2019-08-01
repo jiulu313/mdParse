@@ -14,15 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sparrow.markdown.parser.impl;
+package net.helloworld.md.parser.impl;
 
-import com.sparrow.constant.CONSTANT;
-import com.sparrow.constant.magic.CHAR_SYMBOL;
-import com.sparrow.markdown.mark.MARK;
-import com.sparrow.markdown.mark.MarkContext;
-import com.sparrow.markdown.mark.TagListEntity;
-import com.sparrow.utility.CollectionsUtility;
-import com.sparrow.utility.StringUtility;
+import net.helloworld.md.constant.CONSTANT;
+import net.helloworld.md.constant.magic.CHAR_SYMBOL;
+import net.helloworld.md.mark.TagListEntity;
+import net.helloworld.md.utility.CollectionsUtility;
+import net.helloworld.md.utility.StringUtility;
+
 import java.util.List;
 
 /**
@@ -31,7 +30,7 @@ import java.util.List;
 public class OrderedListParser extends AbstractListParser {
 
     @Override
-    public boolean detectStartMark(MarkContext markContext) {
+    public boolean detectStartMark(net.helloworld.md.mark.MarkContext markContext) {
         int tempPointer = markContext.getCurrentPointer();
         String content = markContext.getContent();
 
@@ -59,7 +58,7 @@ public class OrderedListParser extends AbstractListParser {
     }
 
     @Override
-    protected TagListEntity validate(MarkContext markContext, TagListEntity currentEntity, String line) {
+    protected net.helloworld.md.mark.TagListEntity validate(net.helloworld.md.mark.MarkContext markContext, net.helloworld.md.mark.TagListEntity currentEntity, String line) {
         if (line.equals(CONSTANT.ENTER_TEXT_N)) {
             return currentEntity;
         }
@@ -93,13 +92,13 @@ public class OrderedListParser extends AbstractListParser {
         }
 
         int indent = StringUtility.getPrefixCount(line, "   ");
-        TagListEntity parent = this.getParent(currentEntity, indent);
+        net.helloworld.md.mark.TagListEntity parent = this.getParent(currentEntity, indent);
         if (parent == null) {
             currentEntity.setContent(currentEntity.getContent() + innerLine);
             return currentEntity;
         }
 
-        TagListEntity newEntity = new TagListEntity();
+        net.helloworld.md.mark.TagListEntity newEntity = new net.helloworld.md.mark.TagListEntity();
         newEntity.setParent(parent);
         newEntity.setIndent(indent);
         newEntity.setTitle(digit);
@@ -118,7 +117,7 @@ public class OrderedListParser extends AbstractListParser {
 
     private String parseTagList(List<TagListEntity> tags, Integer intent) {
         StringBuilder ol = new StringBuilder();
-        for (TagListEntity tag : tags) {
+        for (net.helloworld.md.mark.TagListEntity tag : tags) {
             ol.append(String.format("<li>%1$s</li>\n", tag.getContent()));
             if (!CollectionsUtility.isNullOrEmpty(tag.getChildren())) {
                 ol.append(this.parseTagList(tag.getChildren(), tag.getIndent()));
@@ -132,14 +131,14 @@ public class OrderedListParser extends AbstractListParser {
     }
 
     @Override
-    public void parse(MarkContext markContext) {
+    public void parse(net.helloworld.md.mark.MarkContext markContext) {
         List<TagListEntity> tagListEntities = markContext.getCurrentMark().getTagListEntities();
         markContext.append(this.parseTagList(tagListEntities, null));
         markContext.setPointer(markContext.getCurrentMark().getEnd());
     }
 
     @Override
-    public MARK mark() {
-        return MARK.ORDERED_LIST;
+    public net.helloworld.md.mark.MARK mark() {
+        return net.helloworld.md.mark.MARK.ORDERED_LIST;
     }
 }

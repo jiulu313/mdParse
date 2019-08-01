@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.sparrow.markdown.constant.magic;
+package net.helloworld.md.constant.magic;
 
 /**
  * Created by harry on 2018/1/11.

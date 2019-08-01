@@ -1,6 +1,4 @@
-package com.sparrow.markdown.parser.impl;
-
-import com.sparrow.markdown.mark.MARK;
+package net.helloworld.md.parser.impl;
 
 /**
  * @author harry
@@ -8,7 +6,7 @@ import com.sparrow.markdown.mark.MARK;
  */
 public class ItalicParser extends AbstractWithEndTagParser {
 
-    @Override public MARK mark() {
-        return MARK.ITALIC;
+    @Override public net.helloworld.md.mark.MARK mark() {
+        return net.helloworld.md.mark.MARK.ITALIC;
     }
 }

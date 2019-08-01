@@ -1,6 +1,4 @@
-package com.sparrow.markdown.parser.impl;
-
-import com.sparrow.markdown.mark.MARK;
+package net.helloworld.md.parser.impl;
 
 /**
  * ![image](url)
@@ -9,7 +7,7 @@ import com.sparrow.markdown.mark.MARK;
  */
 public class ImageParser extends AbstractWithUrlParser {
     @Override
-    public MARK mark() {
-        return MARK.IMAGE;
+    public net.helloworld.md.mark.MARK mark() {
+        return net.helloworld.md.mark.MARK.IMAGE;
     }
 }

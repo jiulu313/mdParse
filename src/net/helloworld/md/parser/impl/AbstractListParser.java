@@ -14,25 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sparrow.markdown.parser.impl;
+package net.helloworld.md.parser.impl;
 
-import com.sparrow.markdown.constant.CONSTANT;
-import com.sparrow.markdown.constant.magic.CHAR_SYMBOL;
-import com.sparrow.markdown.mark.MarkContext;
-import com.sparrow.markdown.mark.MarkEntity;
-import com.sparrow.markdown.mark.TagListEntity;
-import com.sparrow.markdown.parser.MarkParser;
+import net.helloworld.md.constant.CONSTANT;
+import net.helloworld.md.constant.magic.CHAR_SYMBOL;
+import net.helloworld.md.parser.MarkParser;
 
 /**
  * @author by harry
  */
 public abstract class AbstractListParser implements MarkParser {
-    protected abstract TagListEntity validate(MarkContext markContext, TagListEntity currentEntity, String line);
+    protected abstract net.helloworld.md.mark.TagListEntity validate(net.helloworld.md.mark.MarkContext markContext, net.helloworld.md.mark.TagListEntity currentEntity, String line);
 
-    public MarkEntity validate(MarkContext markContext) {
-        TagListEntity current = new TagListEntity();
+
+    @Override
+    public net.helloworld.md.mark.MarkEntity validate(net.helloworld.md.mark.MarkContext markContext) {
+        net.helloworld.md.mark.TagListEntity current = new net.helloworld.md.mark.TagListEntity();
         current.setIndent(-1);
-        TagListEntity parentEntity = current;
+        net.helloworld.md.mark.TagListEntity parentEntity = current;
         //skip first enter
         markContext.skipPointer(1);
         do {
@@ -48,14 +47,14 @@ public abstract class AbstractListParser implements MarkParser {
             current = this.validate(markContext, current, line);
         }
         while (true);
-        MarkEntity markEntity = MarkEntity.createCurrentMark(this.mark(), markContext.getCurrentPointer());
+        net.helloworld.md.mark.MarkEntity markEntity = net.helloworld.md.mark.MarkEntity.createCurrentMark(this.mark(), markContext.getCurrentPointer());
         markEntity.setTagListEntities(parentEntity.getChildren());
         markEntity.setNextEntity(markContext.getTempNextMark());
         markContext.setTempNextMark(null);
         return markEntity;
     }
 
-    public TagListEntity getParent(TagListEntity current, Integer intent) {
+    public net.helloworld.md.mark.TagListEntity getParent(net.helloworld.md.mark.TagListEntity current, Integer intent) {
         //brother
         if (intent == current.getIndent()) {
             return current.getParent();

@@ -1,15 +1,11 @@
-package com.sparrow.markdown.parser.impl;
-
-import com.sparrow.markdown.mark.MARK;
-import com.sparrow.markdown.mark.MarkContext;
-import com.sparrow.markdown.parser.MarkParser;
+package net.helloworld.md.parser.impl;
 
 /**
  * @author harry
  */
 public class BoldParser extends AbstractWithEndTagParser {
     @Override
-    public MARK mark() {
-        return MARK.BOLD;
+    public net.helloworld.md.mark.MARK mark() {
+        return net.helloworld.md.mark.MARK.BOLD;
     }
 }

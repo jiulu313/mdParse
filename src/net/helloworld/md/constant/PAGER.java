@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.sparrow.markdown.constant;
+package net.helloworld.md.constant;
 
 /**
  * 分页控件配置

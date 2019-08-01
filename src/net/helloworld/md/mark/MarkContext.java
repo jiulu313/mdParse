@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sparrow.markdown.mark;
+package net.helloworld.md.mark;
 
-import com.sparrow.constant.magic.CHAR_SYMBOL;
-import com.sparrow.markdown.parser.MarkParser;
-import com.sparrow.markdown.parser.impl.*;
+import net.helloworld.md.constant.magic.CHAR_SYMBOL;
+import net.helloworld.md.parser.MarkParser;
+import net.helloworld.md.parser.impl.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;

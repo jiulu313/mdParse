@@ -1,9 +1,4 @@
-package com.sparrow.markdown.parser.impl;
-
-import com.sparrow.markdown.mark.MARK;
-import com.sparrow.markdown.mark.MarkContext;
-import com.sparrow.markdown.mark.MarkEntity;
-import com.sparrow.markdown.parser.MarkParser;
+package net.helloworld.md.parser.impl;
 
 /**
  * @author harry
@@ -11,7 +6,8 @@ import com.sparrow.markdown.parser.MarkParser;
  */
 public class CodeParser extends AbstractWithEndTagParser {
 
-    @Override public MarkEntity validate(MarkContext markContext) {
+    @Override
+    public net.helloworld.md.mark.MarkEntity validate(net.helloworld.md.mark.MarkContext markContext) {
         int startIndex = markContext.getCurrentPointer() + this.mark().getStart().length();
         int endMarkIndex = markContext.getContent().indexOf(this.mark().getEnd(), startIndex);
         if (endMarkIndex <= 1) {
@@ -22,12 +18,13 @@ public class CodeParser extends AbstractWithEndTagParser {
         }
         String content = markContext.getContent().substring(markContext.getCurrentPointer()
             + this.mark().getStart().length(), endMarkIndex);
-        MarkEntity markEntity = MarkEntity.createCurrentMark(this.mark(), endMarkIndex);
+        net.helloworld.md.mark.MarkEntity markEntity = net.helloworld.md.mark.MarkEntity.createCurrentMark(this.mark(), endMarkIndex);
         markEntity.setContent(content);
         return markEntity;
     }
 
-    @Override public MARK mark() {
-        return MARK.CODE;
+    @Override
+    public net.helloworld.md.mark.MARK mark() {
+        return net.helloworld.md.mark.MARK.CODE;
     }
 }

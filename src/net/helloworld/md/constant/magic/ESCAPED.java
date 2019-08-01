@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.sparrow.markdown.constant.magic;
+package net.helloworld.md.constant.magic;
 
 /**
  * @author by harry

@@ -15,10 +15,10 @@
  * limitations under the License.
  */
 
-package com.sparrow.markdown.constant;
+package net.helloworld.md.constant;
 
-import com.sparrow.support.AbstractErrorSupport;
-import com.sparrow.support.ModuleSupport;
+import net.helloworld.md.support.AbstractErrorSupport;
+import net.helloworld.md.support.ModuleSupport;
 
 /**
  * /** 第一位 1系统或2模块错误 <p> 2-3位模块 00全局模块(公共使用) 01用户模块  02 EXCEL 03 BLOG 04 SHOP 05 UPLOAD 06 ACTIVITY <p> 4-5位错误编码

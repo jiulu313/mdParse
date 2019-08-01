@@ -15,10 +15,10 @@
  * limitations under the License.
  */
 
-package com.sparrow.markdown.constant;
+package net.helloworld.md.constant;
 
-import com.sparrow.constant.magic.DIGIT;
-import com.sparrow.enums.DATE_TIME_UNIT;
+import net.helloworld.md.constant.magic.DIGIT;
+import net.helloworld.md.enums.DATE_TIME_UNIT;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;

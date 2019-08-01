@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-package com.sparrow.markdown.constant;
+package net.helloworld.md.constant;
 
-import com.sparrow.enums.LOGIN_TYPE;
+import net.helloworld.md.enums.LOGIN_TYPE;
 
 import java.util.HashMap;
 import java.util.Map;

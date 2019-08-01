@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.sparrow.markdown.constant;
+package net.helloworld.md.constant;
 
 /**
  * 用户相关信息 session中保存常量。积分会发生变化不考虑保存到session。

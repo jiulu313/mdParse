@@ -14,21 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sparrow.markdown.parser.impl;
+package net.helloworld.md.parser.impl;
 
-import com.sparrow.constant.magic.CHAR_SYMBOL;
-import com.sparrow.markdown.mark.MarkContext;
-import com.sparrow.markdown.mark.MarkEntity;
-import com.sparrow.markdown.parser.MarkParser;
-
-import static com.sparrow.markdown.mark.MarkContext.BORROWABLE_BLANK;
+import net.helloworld.md.constant.magic.CHAR_SYMBOL;
+import net.helloworld.md.parser.MarkParser;
 
 /**
  * @author by harry
  */
 public abstract class AbstractWithEndTagParser implements MarkParser {
 
-    @Override public boolean detectStartMark(MarkContext markContext) {
+    @Override public boolean detectStartMark(net.helloworld.md.mark.MarkContext markContext) {
         if (markContext.getContent().startsWith(this.mark().getStart(), markContext.getCurrentPointer())) {
             return true;
         }
@@ -45,7 +41,7 @@ public abstract class AbstractWithEndTagParser implements MarkParser {
         return true;
     }
 
-    @Override public MarkEntity validate(MarkContext markContext) {
+    @Override public net.helloworld.md.mark.MarkEntity validate(net.helloworld.md.mark.MarkContext markContext) {
         int startIndex = markContext.getCurrentPointer() + this.mark().getStart().length();
         int endMarkIndex = markContext.getContent().indexOf(this.mark().getEnd(), startIndex);
         if (endMarkIndex <= 1) {
@@ -63,15 +59,15 @@ public abstract class AbstractWithEndTagParser implements MarkParser {
         if (content.contains("\n\n")) {
             return null;
         }
-        MarkEntity markEntity = MarkEntity.createCurrentMark(this.mark(), endMarkIndex);
+        net.helloworld.md.mark.MarkEntity markEntity = net.helloworld.md.mark.MarkEntity.createCurrentMark(this.mark(), endMarkIndex);
         markEntity.setContent(content);
         return markEntity;
     }
 
-    @Override public void parse(MarkContext markContext) {
+    @Override public void parse(net.helloworld.md.mark.MarkContext markContext) {
         String content = markContext.getCurrentMark().getContent();
         //如果包含复杂结构，至少需要两个字符
-        if (content.length() <= 2 || MarkContext.CHILD_MARK_PARSER.get(this.mark()) == null) {
+        if (content.length() <= 2 || net.helloworld.md.mark.MarkContext.CHILD_MARK_PARSER.get(this.mark()) == null) {
             markContext.append(String.format(this.mark().getFormat(), content));
             markContext.setPointer(markContext.getCurrentMark().getEnd());
             if (this.mark().getEnd() != null) {

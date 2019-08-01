@@ -1,6 +1,4 @@
-package com.sparrow.markdown.parser.impl;
-
-import com.sparrow.markdown.mark.MARK;
+package net.helloworld.md.parser.impl;
 
 /**
  * [link](url)
@@ -10,7 +8,7 @@ import com.sparrow.markdown.mark.MARK;
 public class HyperLinkParser extends AbstractWithUrlParser {
 
     @Override
-    public MARK mark() {
-        return MARK.HYPER_LINK;
+    public net.helloworld.md.mark.MARK mark() {
+        return net.helloworld.md.mark.MARK.HYPER_LINK;
     }
 }

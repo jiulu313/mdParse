@@ -1,15 +1,11 @@
-package com.sparrow.markdown.parser.impl;
-
-import com.sparrow.markdown.mark.MARK;
-import com.sparrow.markdown.mark.MarkContext;
-import com.sparrow.markdown.mark.MarkEntity;
+package net.helloworld.md.parser.impl;
 
 /**
  * Created by harry on 2018/2/7.
  */
 public class TabParser extends AbstractWithEndTagParser {
 
-    @Override public MarkEntity validate(MarkContext markContext) {
+    @Override public net.helloworld.md.mark.MarkEntity validate(net.helloworld.md.mark.MarkContext markContext) {
         String line;
         //-4 represent tab key
         int pointer=markContext.getCurrentPointer()+this.mark().getStart().length()-4;
@@ -17,13 +13,13 @@ public class TabParser extends AbstractWithEndTagParser {
         while ((line = markContext.readLine(pointer)).startsWith("    ")) {
             pointer += line.length();
         }
-        MarkEntity markEntity = MarkEntity.createCurrentMark(this.mark(), pointer);
+        net.helloworld.md.mark.MarkEntity markEntity = net.helloworld.md.mark.MarkEntity.createCurrentMark(this.mark(), pointer);
         markEntity.setContent(markContext.getContent().substring(start, pointer).replaceAll("\n+","<br/>"));
         return markEntity;
     }
 
     @Override
-    public MARK mark() {
-        return MARK.TAB;
+    public net.helloworld.md.mark.MARK mark() {
+        return net.helloworld.md.mark.MARK.TAB;
     }
 }

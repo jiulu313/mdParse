@@ -14,13 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sparrow.markdown.parser.impl;
+package net.helloworld.md.parser.impl;
 
-import com.sparrow.constant.magic.SYMBOL;
-import com.sparrow.markdown.mark.MARK;
-import com.sparrow.markdown.mark.MarkContext;
-import com.sparrow.markdown.mark.MarkEntity;
-import com.sparrow.markdown.parser.MarkParser;
+import net.helloworld.md.constant.magic.SYMBOL;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +27,7 @@ import java.util.List;
 public class TableParser extends AbstractWithEndTagParser {
 
     @Override
-    public MarkEntity validate(MarkContext markContext) {
+    public net.helloworld.md.mark.MarkEntity validate(net.helloworld.md.mark.MarkContext markContext) {
         int pointer = markContext.getCurrentPointer() + this.mark().getStart().length();
         String title = markContext.readLine(pointer);
         if (!title.contains(SYMBOL.VERTICAL_LINE)) {
@@ -78,14 +75,14 @@ public class TableParser extends AbstractWithEndTagParser {
         }
         while (true);
 
-        MarkEntity markEntity = MarkEntity.createCurrentMark(this.mark(), pointer);
+        net.helloworld.md.mark.MarkEntity markEntity = net.helloworld.md.mark.MarkEntity.createCurrentMark(this.mark(), pointer);
         markEntity.setTdList(tdList);
         markEntity.setTitleArray(titleArray);
         return markEntity;
     }
 
     @Override
-    public void parse(MarkContext markContext) {
+    public void parse(net.helloworld.md.mark.MarkContext markContext) {
         String[] titleArray = markContext.getCurrentMark().getTitleArray();
         List<String[]> tdList = markContext.getCurrentMark().getTdList();
         StringBuilder table = new StringBuilder(1024);
@@ -107,7 +104,7 @@ public class TableParser extends AbstractWithEndTagParser {
     }
 
     @Override
-    public MARK mark() {
-        return MARK.TABLE;
+    public net.helloworld.md.mark.MARK mark() {
+        return net.helloworld.md.mark.MARK.TABLE;
     }
 }
