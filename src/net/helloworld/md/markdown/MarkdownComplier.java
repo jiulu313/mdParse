@@ -203,15 +203,101 @@ public class MarkdownComplier {
                     }
 
                     continue;
+                } else if (p1 + 2 < end && str.charAt(p1 + 1) == '*' && str.charAt(p1 + 2) != '*') {//粗体
+                    p2 = p1 + 2;
+
+                    boolean bFind = false;
+                    while (p2 < end) {
+                        if (p2 + 1 < end && str.charAt(p2) == '*' && str.charAt(p2 + 1) == '*' && str.charAt(p2 + 2) != '*') {
+                            bFind = true;
+                            break;
+                        } else {
+                            p2++;
+                        }
+                    }
+
+                    if (bFind) {
+                        BoldNode node = new BoldNode();
+                        node.setNodeType(NodeType.NT_BOLD);
+                        node.setContent(str.substring(p1 + 2, p2));
+                        p2++;
+                        p1 = p2;
+                    }
+
+                    continue;
+                } else if (p1 + 3 < end && str.charAt(p1 + 1) == '*' && str.charAt(p1 + 2) == '*' && str.charAt(p1 + 3) != '*') {//斜粗体
+                    p2 = p1 + 3;
+
+                    boolean bFind = false;
+                    while (p2 < end) {
+                        if (p2 + 2 < end && str.charAt(p2) == '*' && str.charAt(p2 + 1) == '*' && str.charAt(p2 + 2) == '*' && str.charAt(p2 + 3) != '*') {
+                            bFind = true;
+                            break;
+                        } else {
+                            p2++;
+                        }
+                    }
+
+                    if (bFind) {
+                        BoldItalicNode node = new BoldItalicNode();
+                        node.setNodeType(NodeType.NT_BOLD_ITALIC);
+                        node.setContent(str.substring(p1 + 3, p2));
+                        p2++;
+                        p1 = p2;
+                    }
+
+                    continue;
+                }
+            } else if (ch == '-' || ch == '_' || ch == '*' || ch == ' ') {//下划线
+                p2 = p1;
+                int temp = p1;
+
+                boolean isDivideLine = false;
+                while (p1 < end) {
+                    if(str.charAt(p1) == '-' || str.charAt(p1) == '_' || str.charAt(p1) == '*'){
+                        char t = str.charAt(p1);
+                        if (p1 + 1 < end && str.charAt(p1 + 1) == t && str.charAt(p1 + 2) == t) { //至少连续3个
+                            p2 = p1 + 2;
+
+                            //是否还有其它字符
+                            boolean hasOtherChar = false;
+                            while (p2 < end) {
+                                if (str.charAt(p2) == t || str.charAt(p2) == ' ') {
+                                    p2++;
+                                    continue;
+                                } else if (str.charAt(p2) == '\n') {
+                                    break;
+                                }else { //还有其它字符，不是下划线
+                                    hasOtherChar = true;
+                                    break;
+                                }
+                            }
+
+                            if(hasOtherChar){
+                                isDivideLine = false;
+                            }else {
+                                isDivideLine = true;
+                            }
+
+                            break;
+                        } else {
+                            break;
+                        }
+                    } else if (str.charAt(p1) == ' ') {
+                        p1++;
+                        continue;
+                    } else if (str.charAt(p1) == '\n') {
+                        break;
+                    }
                 }
 
-
-            } else if (ch == '*') {//斜体
-
-            } else if (ch == '*' && (p1 + 2) < end && str.charAt(p1 + 1) == '*' && str.charAt(p1 + 2) == '*') {//粗斜体,分隔线
-
-            } else if (ch == '-' && (p1 + 2 < end && str.charAt(p1 + 1) == '-' && str.charAt(p1 + 2) == '-')) {//下划线
-
+                if(isDivideLine){
+                    UnorderNode node = new UnorderNode();
+                    node.setNodeType(NodeType.NT_DIVIDE_LINE);
+                    nodeList.add(node);
+                    p1 = p2;
+                    continue;
+                }
             } else if (ch == '_' && (p1 + 2 < end && str.charAt(p1 + 1) == '_' && str.charAt(p1 + 2) == '_')) {//下划线
 
             } else if (ch == '[') {
