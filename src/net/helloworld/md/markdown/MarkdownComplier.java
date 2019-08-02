@@ -298,8 +298,6 @@ public class MarkdownComplier {
                     p1 = p2;
                     continue;
                 }
-            } else if (ch == '_' && (p1 + 2 < end && str.charAt(p1 + 1) == '_' && str.charAt(p1 + 2) == '_')) {//下划线
-
             } else if (ch == '[') {
 
             } else if (ch == '!') {
